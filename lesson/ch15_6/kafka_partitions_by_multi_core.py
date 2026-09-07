@@ -1,16 +1,16 @@
-from common.ch13_1.base_stream_app import BaseStreamApp
+from common.ch13_4.base_stream_app import BaseStreamApp
 from pyspark.sql.dataframe import DataFrame
 from pyspark.sql.functions import get_json_object, col
 from pyspark.sql.types import IntegerType
 from pyspark.sql import SparkSession
 
 
-class KafkaPartitionsBySingleCore(BaseStreamApp):
+class KafkaPartitionsByMultiCore(BaseStreamApp):
     def __init__(self, app_name):
         super().__init__(app_name)
-        self.SPARK_EXECUTOR_INSTANCES = '1'
+        self.SPARK_EXECUTOR_INSTANCES = '3'
         self.SPARK_EXECUTOR_MEMORY = '2g'
-        self.SPARK_EXECUTOR_CORES = '1'
+        self.SPARK_EXECUTOR_CORES = '2'
         self.last_dttm = ''
 
     def main(self):
@@ -53,5 +53,5 @@ class KafkaPartitionsBySingleCore(BaseStreamApp):
 
 
 if __name__ == '__main__':
-    kafka_partitions_by_single_core = KafkaPartitionsBySingleCore(app_name='kafka_partitions_by_single_core')
-    kafka_partitions_by_single_core.main()
+    kafka_partitions_by_multi_core = KafkaPartitionsByMultiCore(app_name='kafka_partitions_by_multi_core')
+    kafka_partitions_by_multi_core.main()
